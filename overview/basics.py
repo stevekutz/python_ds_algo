@@ -66,34 +66,34 @@ import random
 #     print(item)
 # print(str)   
 
-## string functions
-str = "the quick brown fox jumped over the lazy dog"
-print(str.capitalize())  # The quick brown fox jumped over the lazy dog
-print(str.count("the"))  # 2
+# ## string functions
+# str = "the quick brown fox jumped over the lazy dog"
+# print(str.capitalize())  # The quick brown fox jumped over the lazy dog
+# print(str.count("the"))  # 2
 
-# returns True if string ends with specified substring
-print(str.endswith("dog"))  # True
+# # returns True if string ends with specified substring
+# print(str.endswith("dog"))  # True
 
-# find first occurence of substring
-print(str.find("brown"))
+# # find first occurence of substring
+# print(str.find("brown"))
 
-str2 = "abc123"  # a space will result in False for both
-# returns True if all chars are alphanumeric
-print(str2.isalnum())  # True
+# str2 = "abc123"  # a space will result in False for both
+# # returns True if all chars are alphanumeric
+# print(str2.isalnum())  # True
 
-# returns True is all chars are alphabetic
-print(str2.isalpha())  # False
+# # returns True is all chars are alphabetic
+# print(str2.isalpha())  # False
 
-# return True is all chars are digits
-print(str2.isdigit())
+# # return True is all chars are digits
+# print(str2.isdigit())
 
-# Splits string separated by whitespace or optional seperator
-new_list = str.split()
-print(new_list) # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog'
+# # Splits string separated by whitespace or optional seperator
+# new_list = str.split()
+# print(new_list) # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog'
 
-# joins the strings
-str3 = "cat" ; str4 = "dog"
-print(str3.join(str4))  # dcatocatg
+# # joins the strings
+# str3 = "cat" ; str4 = "dog"
+# print(str3.join(str4))  # dcatocatg
 
 # # some common list functions
 # list_1 = ['mouse', 'cat']
@@ -139,3 +139,19 @@ print(str3.join(str4))  # dcatocatg
 # reverse_sorted_list = rand_list[:]
 # reverse_sorted_list.sort(reverse = True)
 # print(f'{reverse_sorted_list}')
+
+## List comprehensions
+def f1(x): return x*2
+def f2(x): return x*4
+
+list_new = []
+for i in range(16):
+    list_new.append(f1(f2(i)))
+
+print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
+
+# with list comprehension
+print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
+
+new_list = [value * 8 for value in range(0,16)]
+print(new_list)
