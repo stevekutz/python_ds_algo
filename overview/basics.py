@@ -196,35 +196,60 @@ import random
 # using Python 3 HOF map & filter , these return an iterator
 # lambda is just an anonymous function
 
-str = "the quick brown fox jumped over the lazy dog"
-new_list = str.split()
-ind = 0
+# str = "the quick brown fox jumped over the lazy dog"
+# new_list = str.split()
+# ind = 0
 
-for item in map(lambda n: n, new_list):
-    print(f' item {ind} is {item}')
-    ind += 1
+# for item in map(lambda n: n, new_list):
+#     print(f' item {ind} is {item}')
+#     ind += 1
 
-#  item 0 is the
-#  item 1 is quick
-#  item 2 is brown
-#  item 3 is fox
-#  item 4 is jumped
-#  item 5 is over
-#  item 6 is the
-#  item 7 is lazy
-#  item 8 is dog
-
-
-new_arr = []
-for item in map(lambda n: n.capitalize(), new_list):
-    new_arr.append(item) 
-
-print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
-print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
+# #  item 0 is the
+# #  item 1 is quick
+# #  item 2 is brown
+# #  item 3 is fox
+# #  item 4 is jumped
+# #  item 5 is over
+# #  item 6 is the
+# #  item 7 is lazy
+# #  item 8 is dog
 
 
-filtered_list = []
-for item in filter(lambda n: len(n) > 4, new_list):
-    filtered_list.append(item)
+# new_arr = []
+# for item in map(lambda n: n.capitalize(), new_list):
+#     new_arr.append(item) 
 
-print(filtered_list)  #  ['quick', 'brown', 'jumped']   
+# print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
+# print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
+
+
+# filtered_list = []
+# for item in filter(lambda n: len(n) > 4, new_list):
+#     filtered_list.append(item)
+
+# print(filtered_list)  #  ['quick', 'brown', 'jumped']   
+
+
+words = str.split('the longest word in the sentence')
+
+print(words)     # ['the', 'longest', 'word', 'in', 'the', 'sentence']
+print(sorted(words, key=len))   # ['in', 'the', 'the', 'word', 'longest', 'sentence']
+
+sl = ['A', 'b', 'a', 'C', 'c']
+
+sl.sort(key = str.lower)
+
+print(f' Using sort method {sl}')     # Using sort method ['A', 'a', 'b', 'C', 'c']
+
+sl.sort()
+print(f' direct sort gives {sl}')
+
+# sorting by index location using lambda operator
+# each element is grocery item, price, and quantity
+grocery_list = [["rice", 2.4, 8], ["flour", 1.9, 5], ["corn", 4.7, 6]]
+
+grocery_list.sort(key=lambda item: item[1])
+print(grocery_list)   # [['flour', 1.9, 5], ['rice', 2.4, 8], ['corn', 4.7, 6]]
+
+grocery_list.sort(key=lambda item: item[0])
+print(grocery_list)   # [['corn', 4.7, 6], ['flour', 1.9, 5], ['rice', 2.4, 
