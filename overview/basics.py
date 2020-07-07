@@ -89,7 +89,7 @@ import random
 
 # # Splits string separated by whitespace or optional seperator
 # new_list = str.split()
-# print(new_list) # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog'
+# print(new_list) # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
 
 # # joins the strings
 # str3 = "cat" ; str4 = "dog"
@@ -140,18 +140,91 @@ import random
 # reverse_sorted_list.sort(reverse = True)
 # print(f'{reverse_sorted_list}')
 
-## List comprehensions
-def f1(x): return x*2
-def f2(x): return x*4
+# ## List comprehensions
+# def f1(x): return x*2
+# def f2(x): return x*4
 
-list_new = []
-for i in range(16):
-    list_new.append(f1(f2(i)))
+# list_new = []
+# for i in range(16):
+#     list_new.append(f1(f2(i)))
 
-print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
+# print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
 
-# with list comprehension
-print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
+# # with list comprehension
+# print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
 
-new_list = [value * 8 for value in range(0,16)]
-print(new_list)
+# new_list = [value * 8 for value in range(0,16)]
+# print(new_list)
+
+# higher order functions
+## function that take other function as arguments OR that return functions
+
+# def greeting(language):
+#     if language == 'eng':
+#         return 'hello world'
+#     elif language == 'fr':
+#         return 'Bonjour le monde'
+#     else: return 'language not supported'
+
+# # function is included in a list
+# l_func = [ greeting('eng'), greeting('fr'), greeting('ger')]
+
+# print(l_func[0])  # hello world
+# print(l_func[1])  # Bonjour le monde
+# print(l_func[2])  # language not supported
+
+# # function used as argument for another function
+# def call_other_func(other_func):
+#     language = 'fr'
+#     return ( other_func(language) )  
+
+# print(call_other_func(greeting))    # Bonjour le monde
+
+
+# def call_other_func2(other_func, lang):
+#     return ( other_func(lang) )
+
+# print(call_other_func2(greeting, "eng"))  # hello world
+
+
+# def call_other_func3(other_func, lang = "fr"):
+#     return ( other_func(lang) )
+
+# print( call_other_func3(greeting) )     # Bonjour le monde
+# print(call_other_func3(greeting, 'ital'))  # language not support
+
+# using Python 3 HOF map & filter , these return an iterator
+# lambda is just an anonymous function
+
+str = "the quick brown fox jumped over the lazy dog"
+new_list = str.split()
+ind = 0
+
+for item in map(lambda n: n, new_list):
+    print(f' item {ind} is {item}')
+    ind += 1
+
+#  item 0 is the
+#  item 1 is quick
+#  item 2 is brown
+#  item 3 is fox
+#  item 4 is jumped
+#  item 5 is over
+#  item 6 is the
+#  item 7 is lazy
+#  item 8 is dog
+
+
+new_arr = []
+for item in map(lambda n: n.capitalize(), new_list):
+    new_arr.append(item) 
+
+print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
+print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
+
+
+filtered_list = []
+for item in filter(lambda n: len(n) > 4, new_list):
+    filtered_list.append(item)
+
+print(filtered_list)  #  ['quick', 'brown', 'jumped']   
