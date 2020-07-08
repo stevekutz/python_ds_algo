@@ -95,6 +95,7 @@ import random
 # str3 = "cat" ; str4 = "dog"
 # print(str3.join(str4))  # dcatocatg
 
+##########################################################
 # # some common list functions
 # list_1 = ['mouse', 'cat']
 # # str[0] = str[0].capitalize()
@@ -170,6 +171,7 @@ import random
 # new_list = [value * 8 for value in range(0,16)]
 # print(new_list)
 
+##############################################
 # higher order functions
 ## function that take other function as arguments OR that return functions
 
@@ -210,8 +212,8 @@ import random
 # using Python 3 HOF map & filter , these return an iterator
 # lambda is just an anonymous function
 
-# str = "the quick brown fox jumped over the lazy dog"
-# new_list = str.split()
+str = "the quick brown fox jumped over the lazy dog"
+new_list = str.split()
 # ind = 0
 
 # for item in map(lambda n: n, new_list):
@@ -228,13 +230,37 @@ import random
 # #  item 7 is lazy
 # #  item 8 is dog
 
+# convert list of capitalized words to lower case
+lower_list = [item.lower() for item in new_arr]
+print(f' lower list {lower_list} ')
 
-# new_arr = []
-# for item in map(lambda n: n.capitalize(), new_list):
-#     new_arr.append(item) 
+# swap upper-lower case
+swapped = [item.swapcase() for item in new_arr]
+print(f' swapped cases {swapped} ')
 
-# print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
-# print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
+# removes leading & trailing white space
+str_ws = " cat dog  "
+no_lead_trail_ws = str_ws.strip(' ')     
+print(f'>>{no_lead_trail_ws} with length {len(no_lead_trail_ws)}')  #
+print(f'{str_ws} with length {len(str_ws)}')
+
+str_char = "the fat cat"
+no_t = str_char.strip('t')
+print(f'{no_t}')
+
+# remove all whitespace using       replace
+str_sp = " the mouse house  "
+no_sp = str_sp.replace(" ", "")
+print(f'{no_sp}')
+
+
+# using lambda to capitalize every word in list
+new_arr = []
+for item in map(lambda n: n.capitalize(), new_list):
+    new_arr.append(item) 
+
+print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
+print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
 
 
 # filtered_list = []
@@ -268,6 +294,7 @@ import random
 # grocery_list.sort(key=lambda item: item[0])
 # print(grocery_list)   # [['corn', 4.7, 6], ['flour', 1.9, 5], ['rice', 2.4, 8 ]]
 
+#################################################################
 # Recursion
 ## Base case is argument that tests for terminating process to avoid infinite loop
 ## Recursion is a special case of iteration called tail-iteration
@@ -302,30 +329,43 @@ import random
 
 # print(f' using recursion {list}')  # using recursion [1, 2, 3, 4, 5]
 
+####################################
 # Generators
-import time
+## Generators are funtions that return an entire sequence of results(use yeild)
+## Generators yeilds items instead of making a list
+## 
 
-# generator function creates an iterator of odd itegers between n & m
-def oddGen(n, m):
-    while n < m:
-        yield n
-        n += 2    
 
-# creates a list of odd numbers between n & m
-def oddList(n, m):
-    list = []
-    while n < m:
-        list.append(n)
-        n += 2
-    return list
 
-# show run time
-t1 = time.time()
+# import time
 
-sum(oddGen(1, 100_000_000))
-# print("Time to sum an iterator: %f" % (time.time() - t1))
-print(f' Time to sum an iterator {time.time() - t1}')
+# # generator function creates an iterator of odd itegers between n & m
+# def oddGen(n, m):
+#     while n < m:
+#         print(n)
+#         yield n
+#         n += 2    
 
-t1 = time.time()
-sum(oddList(1, 100_000_000))
-print(f' Time to build & sum a list {time.time() - t1}')
+# # creates a list of odd numbers between n & m
+# def oddList(n, m):
+#     list = []
+#     while n < m:
+#         list.append(n)
+#         n += 2
+#     return list
+
+# # show run time
+# t1 = time.time()
+
+# sum(oddGen(1, 100_000_000))
+# # print("Time to sum an iterator: %f" % (time.time() - t1))
+# print(f' Time to sum an iterator {time.time() - t1}')
+
+# t1 = time.time()
+# sum(oddList(1, 100_000_000))
+# print(f' Time to build & sum a list {time.time() - t1}')
+
+## Generator expressions build generator obj more succintly (similar to using list comprehensions)
+## Since generator return a lazy iterator obj, it can looped over without storing the entire 
+## content of what is being looped over in memory. A list loads itself into memory.
+
