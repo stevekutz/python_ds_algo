@@ -141,17 +141,31 @@ import random
 # print(f'{reverse_sorted_list}')
 
 # ## List comprehensions
-# def f1(x): return x*2
-# def f2(x): return x*4
+def f1(x): return x*2
+def f2(x): return x*4
 
-# list_new = []
-# for i in range(16):
-#     list_new.append(f1(f2(i)))
+list_new = []
+for i in range(16):
+    list_new.append(f1(f2(i)))
 
-# print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
+print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
 
-# # with list comprehension
-# print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
+# with list comprehension
+print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
+# 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
+
+# list comprehension instead of nested for loops
+list1 = [[1,2,3],[4,5,6]]
+cross_list = [i * j for i in list1[0] for j in list1[1]]
+print(f' cross_lists is {cross_list}')  # cross_lists is [4, 5, 6, 8, 10, 12, 12, 15, 18]
+
+# using nested for loops
+cross_list2 = []
+for i in list1[0]:
+    for j in list1[1]:
+        cross_list2.append(i*j)
+
+print(f' cross_list2 is {cross_list2}')  # cross_list2 is [4, 5, 6, 8, 10, 12, 12, 15, 18]      
 
 # new_list = [value * 8 for value in range(0,16)]
 # print(new_list)
@@ -230,26 +244,26 @@ import random
 # print(filtered_list)  #  ['quick', 'brown', 'jumped']   
 
 
-words = str.split('the longest word in the sentence')
+# words = str.split('the longest word in the sentence')
 
-print(words)     # ['the', 'longest', 'word', 'in', 'the', 'sentence']
-print(sorted(words, key=len))   # ['in', 'the', 'the', 'word', 'longest', 'sentence']
+# print(words)     # ['the', 'longest', 'word', 'in', 'the', 'sentence']
+# print(sorted(words, key=len))   # ['in', 'the', 'the', 'word', 'longest', 'sentence']
 
-sl = ['A', 'b', 'a', 'C', 'c']
+# sl = ['A', 'b', 'a', 'C', 'c']
 
-sl.sort(key = str.lower)
+# sl.sort(key = str.lower)
 
-print(f' Using sort method {sl}')     # Using sort method ['A', 'a', 'b', 'C', 'c']
+# print(f' Using sort method {sl}')     # Using sort method ['A', 'a', 'b', 'C', 'c']
 
-sl.sort()
-print(f' direct sort gives {sl}')
+# sl.sort()
+# print(f' direct sort gives {sl}')
 
-# sorting by index location using lambda operator
-# each element is grocery item, price, and quantity
-grocery_list = [["rice", 2.4, 8], ["flour", 1.9, 5], ["corn", 4.7, 6]]
+# # sorting by index location using lambda operator
+# # each element is grocery item, price, and quantity
+# grocery_list = [["rice", 2.4, 8], ["flour", 1.9, 5], ["corn", 4.7, 6]]
 
-grocery_list.sort(key=lambda item: item[1])
-print(grocery_list)   # [['flour', 1.9, 5], ['rice', 2.4, 8], ['corn', 4.7, 6]]
+# grocery_list.sort(key=lambda item: item[1])
+# print(grocery_list)   # [['flour', 1.9, 5], ['rice', 2.4, 8], ['corn', 4.7, 6]]
 
-grocery_list.sort(key=lambda item: item[0])
-print(grocery_list)   # [['corn', 4.7, 6], ['flour', 1.9, 5], ['rice', 2.4, 
+# grocery_list.sort(key=lambda item: item[0])
+# print(grocery_list)   # [['corn', 4.7, 6], ['flour', 1.9, 5], ['rice', 2.4, 8 ]]
