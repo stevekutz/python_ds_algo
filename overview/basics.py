@@ -140,32 +140,32 @@ import random
 # reverse_sorted_list.sort(reverse = True)
 # print(f'{reverse_sorted_list}')
 
-# ## List comprehensions
-def f1(x): return x*2
-def f2(x): return x*4
+# # ## List comprehensions
+# def f1(x): return x*2
+# def f2(x): return x*4
 
-list_new = []
-for i in range(16):
-    list_new.append(f1(f2(i)))
+# list_new = []
+# for i in range(16):
+#     list_new.append(f1(f2(i)))
 
-print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
+# print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
 
-# with list comprehension
-print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
-# 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
+# # with list comprehension
+# print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
+# # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
 
-# list comprehension instead of nested for loops
-list1 = [[1,2,3],[4,5,6]]
-cross_list = [i * j for i in list1[0] for j in list1[1]]
-print(f' cross_lists is {cross_list}')  # cross_lists is [4, 5, 6, 8, 10, 12, 12, 15, 18]
+# # list comprehension instead of nested for loops
+# list1 = [[1,2,3],[4,5,6]]
+# cross_list = [i * j for i in list1[0] for j in list1[1]]
+# print(f' cross_lists is {cross_list}')  # cross_lists is [4, 5, 6, 8, 10, 12, 12, 15, 18]
 
-# using nested for loops
-cross_list2 = []
-for i in list1[0]:
-    for j in list1[1]:
-        cross_list2.append(i*j)
+# # using nested for loops
+# cross_list2 = []
+# for i in list1[0]:
+#     for j in list1[1]:
+#         cross_list2.append(i*j)
 
-print(f' cross_list2 is {cross_list2}')  # cross_list2 is [4, 5, 6, 8, 10, 12, 12, 15, 18]      
+# print(f' cross_list2 is {cross_list2}')  # cross_list2 is [4, 5, 6, 8, 10, 12, 12, 15, 18]      
 
 # new_list = [value * 8 for value in range(0,16)]
 # print(new_list)
@@ -267,3 +267,37 @@ print(f' cross_list2 is {cross_list2}')  # cross_list2 is [4, 5, 6, 8, 10, 12, 1
 
 # grocery_list.sort(key=lambda item: item[0])
 # print(grocery_list)   # [['corn', 4.7, 6], ['flour', 1.9, 5], ['rice', 2.4, 8 ]]
+
+# Recursion
+## Base case is argument that tests for terminating process to avoid infinite loop
+## Recursion is a special case of iteration called tail-iteration
+## You should be able to convert an iterative function to a recursive & vice-versa
+## Usually iteration is more efficient
+## Recursion usually easier to understand & useful for linked lists & trees
+
+# Using iteration(while loop)
+def iterTest(low, high):
+    list = []
+    while low <= high:
+        list.append(low)
+        low += 1
+    print(f' Using iteration {list}')
+
+iterTest(1,5)  # Using iteration [1, 2, 3, 4, 5]
+
+# Using recursion(function calls itself)
+list = []
+def recurTest(low, high):
+    if low <= high:
+        list.append(low)
+        print(f' list is {list}')
+        recurTest(low + 1, high) 
+
+recurTest(1, 5)
+# list is [1]
+# list is [1, 2]
+# list is [1, 2, 3]
+# list is [1, 2, 3, 4]
+# list is [1, 2, 3, 4, 5]
+
+print(f' using recursion {list}')  # using recursion [1, 2, 3, 4, 5]
