@@ -275,29 +275,57 @@ import random
 ## Usually iteration is more efficient
 ## Recursion usually easier to understand & useful for linked lists & trees
 
-# Using iteration(while loop)
-def iterTest(low, high):
+# # Using iteration(while loop)
+# def iterTest(low, high):
+#     list = []
+#     while low <= high:
+#         list.append(low)
+#         low += 1
+#     print(f' Using iteration {list}')
+
+# iterTest(1,5)  # Using iteration [1, 2, 3, 4, 5]
+
+# # Using recursion(function calls itself)
+# list = []
+# def recurTest(low, high):
+#     if low <= high:
+#         list.append(low)
+#         print(f' list is {list}')
+#         recurTest(low + 1, high) 
+
+# recurTest(1, 5)
+# # list is [1]
+# # list is [1, 2]
+# # list is [1, 2, 3]
+# # list is [1, 2, 3, 4]
+# # list is [1, 2, 3, 4, 5]
+
+# print(f' using recursion {list}')  # using recursion [1, 2, 3, 4, 5]
+
+# Generators
+import time
+
+# generator function creates an iterator of odd itegers between n & m
+def oddGen(n, m):
+    while n < m:
+        yield n
+        n += 2    
+
+# creates a list of odd numbers between n & m
+def oddList(n, m):
     list = []
-    while low <= high:
-        list.append(low)
-        low += 1
-    print(f' Using iteration {list}')
+    while n < m:
+        list.append(n)
+        n += 2
+    return list
 
-iterTest(1,5)  # Using iteration [1, 2, 3, 4, 5]
+# show run time
+t1 = time.time()
 
-# Using recursion(function calls itself)
-list = []
-def recurTest(low, high):
-    if low <= high:
-        list.append(low)
-        print(f' list is {list}')
-        recurTest(low + 1, high) 
+sum(oddGen(1, 100_000_000))
+# print("Time to sum an iterator: %f" % (time.time() - t1))
+print(f' Time to sum an iterator {time.time() - t1}')
 
-recurTest(1, 5)
-# list is [1]
-# list is [1, 2]
-# list is [1, 2, 3]
-# list is [1, 2, 3, 4]
-# list is [1, 2, 3, 4, 5]
-
-print(f' using recursion {list}')  # using recursion [1, 2, 3, 4, 5]
+t1 = time.time()
+sum(oddList(1, 100_000_000))
+print(f' Time to build & sum a list {time.time() - t1}')
