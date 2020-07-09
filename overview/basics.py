@@ -1,4 +1,7 @@
 import random
+# from builtins import str
+import string
+import time
 
 # # Variable scope
 # ##  local environment(namespace) is created inside function
@@ -141,6 +144,7 @@ import random
 # reverse_sorted_list.sort(reverse = True)
 # print(f'{reverse_sorted_list}')
 
+############################################
 # # ## List comprehensions
 # def f1(x): return x*2
 # def f2(x): return x*4
@@ -151,6 +155,7 @@ import random
 
 # print(list_new)     # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
 
+################################
 # # with list comprehension
 # print( [f1(x) for x in range(64) if x in [f2(j) for j in range(16)] ])
 # # 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120]
@@ -159,6 +164,67 @@ import random
 # list1 = [[1,2,3],[4,5,6]]
 # cross_list = [i * j for i in list1[0] for j in list1[1]]
 # print(f' cross_lists is {cross_list}')  # cross_lists is [4, 5, 6, 8, 10, 12, 12, 15, 18]
+
+
+# # find values in cross_list that are between 8 & 14 inclusive (e.g. 8-14)
+# find_8_14 = [val for val in cross_list if val in range(8,15)]
+# print(f'find_8_14 is {find_8_14}')
+
+# # d = 8
+# # print(type(d))
+# # num_str = str(d)
+# # print(type(num_str))
+
+# # List comprehension: Find values in cross_list that contain the digit '8'
+# ## Note that we need to import string to use 'find'
+# ## find returns index of item found, -1 otherwise
+
+# list_8 = [item for item in cross_list if str(item).find('8') != -1]
+# print(list_8)  # [8, 18]
+
+# for item in list_8:
+#     print(type(item))
+
+# <class 'int'>
+# <class 'int'>
+
+# # some debug code to run above
+# list_8 = []
+# for item in cross_list:
+#     print(str(item).find('8'))
+
+# list_8 = []
+# for item in cross_list:
+#     if str(item).find('8') != -1:
+#         list_8.append(item)
+
+# print(list_8)        
+# ############    Repeated values 
+# # count all repeated values into a dict & put repeated vals into a list
+# list_vals = [1, 4, 5, 6, 6, 8, 10, 12, 12, 15, 18, 1]
+# list_rep = []
+# dict_count = {}
+# for val in list_vals:
+#     if val in dict_count:
+#         dict_count[val] += 1
+#         list_rep.append(val)
+#     else:
+#         dict_count[val] = 1
+
+# ## just for debugging fun
+# # for k,v in dict_count.items():
+# #     if v > 1:
+# #         list_rep.append(k)
+
+# print(f' list_rep  {list_rep}')
+
+# # Find repeated vals and put into a list
+# rep_vals = list(set([val for val in list_vals if list_vals.count(val) > 1]))
+# print(f" Using list comprehension {rep_vals}")
+
+
+# squares = [value**2 for value in range(1,11)]
+# print(squares)
 
 # # using nested for loops
 # cross_list2 = []
@@ -170,6 +236,9 @@ import random
 
 # new_list = [value * 8 for value in range(0,16)]
 # print(new_list)
+
+
+
 
 ##############################################
 # higher order functions
@@ -230,37 +299,37 @@ new_list = str.split()
 # #  item 7 is lazy
 # #  item 8 is dog
 
-# convert list of capitalized words to lower case
-lower_list = [item.lower() for item in new_arr]
-print(f' lower list {lower_list} ')
+# # convert list of capitalized words to lower case
+# lower_list = [item.lower() for item in new_arr]
+# print(f' lower list {lower_list} ')
 
-# swap upper-lower case
-swapped = [item.swapcase() for item in new_arr]
-print(f' swapped cases {swapped} ')
+# # swap upper-lower case
+# swapped = [item.swapcase() for item in new_arr]
+# print(f' swapped cases {swapped} ')
 
-# removes leading & trailing white space
-str_ws = " cat dog  "
-no_lead_trail_ws = str_ws.strip(' ')     
-print(f'>>{no_lead_trail_ws} with length {len(no_lead_trail_ws)}')  #
-print(f'{str_ws} with length {len(str_ws)}')
+# # removes leading & trailing white space
+# str_ws = " cat dog  "
+# no_lead_trail_ws = str_ws.strip(' ')     
+# print(f'>>{no_lead_trail_ws} with length {len(no_lead_trail_ws)}')  #
+# print(f'{str_ws} with length {len(str_ws)}')
 
-str_char = "the fat cat"
-no_t = str_char.strip('t')
-print(f'{no_t}')
+# str_char = "the fat cat"
+# no_t = str_char.strip('t')
+# print(f'{no_t}')
 
-# remove all whitespace using       replace
-str_sp = " the mouse house  "
-no_sp = str_sp.replace(" ", "")
-print(f'{no_sp}')
+# # remove all whitespace using       replace
+# str_sp = " the mouse house  "
+# no_sp = str_sp.replace(" ", "")
+# print(f'{no_sp}')
 
 
-# using lambda to capitalize every word in list
-new_arr = []
-for item in map(lambda n: n.capitalize(), new_list):
-    new_arr.append(item) 
+# # using lambda to capitalize every word in list
+# new_arr = []
+# for item in map(lambda n: n.capitalize(), new_list):
+#     new_arr.append(item) 
 
-print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
-print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
+# print(new_arr)   # ['The', 'Quick', 'Brown', 'Fox', 'Jumped', 'Over', 'The', 'Lazy', 'Dog']
+# print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
 
 
 # filtered_list = []
@@ -369,3 +438,10 @@ print(new_list)  # ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'la
 ## Since generator return a lazy iterator obj, it can looped over without storing the entire 
 ## content of what is being looped over in memory. A list loads itself into memory.
 
+t1 = time.time()
+square_nums_lc = [val**2 for val in range(1,1000000)]
+print(f' List Comprehension time is {time.time() - t1}')
+
+t1 = time.time()
+square_nums_gc = (val**2 for val in range(1,1000000))
+print(f' Generator time is {time.time() - t1}')
