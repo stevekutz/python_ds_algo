@@ -484,4 +484,26 @@ print(emp1.pay())     # payed Moe
 print(emp1.__repr__)  # <bound method Employee.__repr__ of  custom object ('Moe')>
 
 
-# class SpecialEmployee(Employee):
+class SpecialEmployee(Employee):
+    # __init__  needed for subclass to define its own class variables
+    def __init__(self, name, rate, bonus):
+        Employee.__init__(self, name, rate)  # same as super().__init_(self, name, rate)
+        self.bonus = bonus
+
+
+    
+    def hours(self, numHours):
+        self.owed += numHours * self.rate + self.bonus
+        return(" %.2f hours worked NOW " % numHours)
+
+
+# verify if subclass
+print(issubclass(SpecialEmployee, Employee))  # True
+print(issubclass(Employee, SpecialEmployee))  # False
+
+
+Howie = SpecialEmployee("Google", 50, 1000)
+Jack = Employee("Alphabet", 4500)
+
+print(isinstance(Howie, Employee))         # True
+print(isinstance(Howie, SpecialEmployee))  # True
