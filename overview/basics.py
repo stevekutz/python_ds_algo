@@ -401,8 +401,8 @@ new_list = str.split()
 ####################################
 # Generators
 ## Generators are funtions that return an entire sequence of results(use yeild)
-## Generators yeilds items instead of making a list
-## 
+## Generators yields items instead of making a list
+## Generators always return None
 
 
 
@@ -438,10 +438,50 @@ new_list = str.split()
 ## Since generator return a lazy iterator obj, it can looped over without storing the entire 
 ## content of what is being looped over in memory. A list loads itself into memory.
 
-t1 = time.time()
-square_nums_lc = [val**2 for val in range(1,1000000)]
-print(f' List Comprehension time is {time.time() - t1}')
+# t1 = time.time()
+# square_nums_lc = [val**2 for val in range(1,1000000)]
+# print(f' List Comprehension time is {time.time() - t1}')
 
-t1 = time.time()
-square_nums_gc = (val**2 for val in range(1,1000000))
-print(f' Generator time is {time.time() - t1}')
+# t1 = time.time()
+# square_nums_gc = (val**2 for val in range(1,1000000))
+# print(f' Generator time is {time.time() - t1}')
+
+
+## Static vs Class methods
+class Employee():
+    numEmployee_instances = 0
+
+    def __init__(self, name, rate):
+        self.owed = 0    # setting a default valie within __init__
+        self.name = name
+        self.rate = rate
+
+        Employee.numEmployee_instances += 1
+
+    def __del__(self):
+        Employee.numEmployee_instances -= 1
+
+    def hours(self, numHours):
+        self.owed += numHours * self.rate
+        return (" %.2f hours worked" % numHours)
+
+    def pay(self):
+        self.owed = 0
+        return("payed %s " % self.name)     
+
+    def __repr__(self):
+        return (" custom object (%r)" % self.name)
+
+
+emp1 = Employee("Moe", 19.25)
+emp2 = Employee("Joe", 18.25)
+
+print(Employee.numEmployee_instances)    # 2
+
+print(emp1.hours(30)) # 0.00 hours worked
+print(emp1.owed)      # 577.5
+print(emp1.pay())     # payed Moe
+print(emp1.__repr__)  # <bound method Employee.__repr__ of  custom object ('Moe')>
+
+
+# class SpecialEmployee(Employee):
