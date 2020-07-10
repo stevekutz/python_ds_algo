@@ -446,8 +446,9 @@ new_list = str.split()
 # square_nums_gc = (val**2 for val in range(1,1000000))
 # print(f' Generator time is {time.time() - t1}')
 
+#################################################################################
+## Classes
 
-## Static vs Class methods
 class Employee():
     numEmployee_instances = 0
 
@@ -507,3 +508,38 @@ Jack = Employee("Alphabet", 4500)
 
 print(isinstance(Howie, Employee))         # True
 print(isinstance(Howie, SpecialEmployee))  # True
+
+
+## Static vs Class methods
+# Class methods only deals with class itself and not instances
+# Static methods deals with parameters passed in, has no acccess to class variables
+
+class Exponential():
+    base = 3  # base class variable
+    @classmethod
+    def exp(cls, x):    # first arg is cls by convention
+        return (cls.base**x)  
+
+    @ staticmethod
+    def addition(x, y):
+        return (x + y)
+        # return (x + y + base)  # NameError: name 'base' is not defined
+
+    @classmethod
+    def change_base(cls):
+        base = 5    
+
+class Exponential_Child(Exponential):
+    base = 2  # base class variable changed to 4
+
+exp_class = Exponential()
+print(f' 4 cubed is from class method   {exp_class.exp(4)} ')   # 4 cubed is from class method   81 
+print(f' Sum from static method recieves parameters {exp_class.addition(4,10)} ')  # Sum from static method recieves parameters 14 
+exp_class.change_base()  # # Does not change class
+print(f' 4 raised to 5 is from class method   {exp_class.exp(4)} ')   # Does not change class
+
+exp_child = Exponential_Child()
+print(f' 4 squared is from inherited class method using new base {exp_child.exp(4)}')  # 4 squared is from inherited class method using new base 16 
+print(f' Sum from static method received parameters {exp_child.addition(1,3)}')  # Sum from static method received parameters 4
+
+
