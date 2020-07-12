@@ -184,9 +184,119 @@ print(f" {'nine' in dict3} ")      # False
 dict5 = dict3.copy()
 print(f' id dict1: {id(dict1)} id dict5: {id(dict5)}')  # should show different mem location
 
-# Creates new dict from defined seq of keys and intializes to new value
+# Creates new dict from defined set of keys and initializes to new value
 keys = {'a', 'b', 'c'}
 
 dict6 = dict.fromkeys(keys, 0)
 print(dict6)   # {'b': 0, 'c': 0, 'a': 0}
 
+# get method returns the value of key if it exists, return None otherwise
+val = dict5.get('two')
+print(f' get method returns value: {val}')  # get method returns value: 2
+
+
+print(dict5)
+# returns value at key and removes k,v from dict
+dict_kv = dict5.pop('six')
+print(f' dict5 now {dict5}')  #
+print(f' removed from dict5 {dict_kv}')  # removed from dict5 -66
+
+# removes last inserted item from dict5 & returns as a tuple
+removed_tup = dict5.popitem()
+print(f' removed is {removed_tup} {type(removed_tup)}') # removed is ('five', 5) <class 'tuple'>
+print(f' dict5 now {dict5}') # dict5 now {'one': '1', 'two': '2', 'three': '3', 'four': 4}
+
+# return value of key if it exists, if not found, adds kv to dict
+ret_kv = dict5.setdefault('one')
+print(f' key is found, value is {ret_kv}')
+
+ret_kv2 = dict5.setdefault('five', '5')
+print(f' key not found, kv added, value is {ret_kv2}')
+print(f' dict5 is now {dict5}')
+
+# the items() method returns a tuples of the key value pairs
+dict5_items = (dict5.items())
+print(f' type is {type(dict5.items())}' )  #  type is <class 'dict_items'>
+print(f' {dict5.items()}')        #  dict_items([('one', '1'), ('two', '2'), ('three', '3'), ('four', 4), ('five', '5')])
+print(f' dict5_items is {dict5_items} ')    #   dict5_items is dict_items([('one', '1'), ('two', '2'), ('three', '3'), ('four', 4), ('five', '5')]
+
+# Verifying data structure
+for item in dict5.items():
+    print(f' item is {item} ')
+    print(f' type is {type(item)}')
+
+# item is ('one', '1') 
+# type is <class 'tuple'>
+# item is ('two', '2') 
+# type is <class 'tuple'>
+# item is ('three', '3') 
+# type is <class 'tuple'>
+# item is ('four', 4) 
+# type is <class 'tuple'>
+# item is ('five', '5') 
+# type is <class 'tuple'>
+
+## dict6 = {'b': 0, 'c': 0, 'a': 0}
+# get all keys
+keys = dict6.keys()
+print(f' all keys {keys}  of type {type(keys)}')  # all keys dict_keys(['c', 'b', 'a'])  of type <class 'dict_keys'>
+
+# get all values
+vals = dict6.values()
+print(f' all values {vals} of type {type(vals)} ') # all values dict_values([0, 0, 0]) of type <class 'dict_values'> 
+
+
+# sorting
+dict7 = dict({'one': 1, 'two': 2, 'three': 3})
+
+# sorts by key
+sort_key = sorted(list(dict7))
+print(f' sorted  by key {sort_key}  type {type(sort_key)} ') #  sorted  by key ['one', 'three', 'two']  type <class 'list'> 
+
+sort_vals = sorted(list(dict7.values()))
+print(f' sort_vals {sort_vals}  type  {type(sort_vals)}')   #   sort_vals [1, 2, 3]  type  <class 'list'>
+
+# sorting keys by dictionary value
+sort_keys2 = sorted(list(dict7), key = dict7.__getitem__)
+print(sort_keys2)    # ['one', 'two', 'three']
+
+# sorting vals by dictionary key
+sort_vals2 = [value for (key,value) in sorted(dict7.items())] 
+print(sort_vals2)   # [1, 3, 2]
+
+sort_vals3 = [value for (key, value) in sorted(dict7.items())]
+print(sort_vals3)  # [1, 3, 2]
+
+dict8 = {'one': 'uno', 'two': 'deux', 'three': 'trois'}
+
+sort_vals4 = [dict8[i] for i in sorted(list(dict7), key = dict7.__getitem__)]
+# the numeric values from dict7 and used to sort the text values in dict8
+print(sort_vals4)   # ['uno', 'deux', 'trois']
+
+
+# Read in file and count occurrences of words
+def wordcount(fname):
+    try:
+        fhand=open(fname)
+    except:
+        print(f" Cannot open file  {fname}" )  
+        exit()
+
+    count = dict() 
+    for line in fhand:
+        words = line.split()
+        for word in words:
+            if word not in count:
+                count[word] = 1
+            else:
+                count[word] +=1
+    return (count)                
+
+count = wordcount("overview/text.txt")
+
+filtered = {key:value for key,value in count.items() if value < 50 and value > 20  } 
+print(filtered)   # {'was': 42, 'of': 33, 'and': 42, 'she': 48, 'it': 32, 'a': 40}
+
+filt_sort = [sorted(list(filtered.values()), reverse = True)]
+
+print(filt_sort)  # [[48, 42, 42, 40, 33, 32]]
