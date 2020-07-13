@@ -304,133 +304,134 @@ import random
 # print(filt_sort)  # [[48, 42, 42, 40, 33, 32]]
 
 
-# list of dictionaries, enumerate to get index
-list_dict = [{"first": "one", "second": "two", "third": "three"}]
-for item in list_dict:
-    for index, (k,v) in enumerate(item.items()):
-        print(f' at index {index:<5} key is \t {k:<15} value is \t {v:<10}')
+# # list of dictionaries, enumerate to get index
+# list_dict = [{"first": "one", "second": "two", "third": "three"}]
+# for item in list_dict:
+#     for index, (k,v) in enumerate(item.items()):
+#         print(f' at index {index:<5} key is \t {k:<15} value is \t {v:<10}')
 
-#########################################################
-## Sets - unordered collections of uniue items
-# mutable, set iteslef can have items added, removed
-# the items themselves MUST be immutable
-# CANNOT use slicing or indexing
-# `frozen set` is immutable, `set` obj is mutable
-# Cannot use mutable obj like list or dictionary in set
-# tuple is valid in sets
+# #########################################################
+# ## Sets - unordered collections of uniue items
+# # mutable, set iteslef can have items added, removed
+# # the items themselves MUST be immutable
+# # CANNOT use slicing or indexing
+# # `frozen set` is immutable, `set` obj is mutable
+# # Cannot use mutable obj like list or dictionary in set
+# # tuple is valid in sets
 
-tup_set = {(1,2,3), 4, 5, ('A', 'B')}
-print(tup_set)   # {(1, 2, 3), 4, 5, ('A', 'B')}
+# tup_set = {(1,2,3), 4, 5, ('A', 'B')}
+# print(tup_set)   # {(1, 2, 3), 4, 5, ('A', 'B')}
 
-for item in tup_set:
-    print(item)
+# for item in tup_set:
+#     print(item)
 
-# (1, 2, 3)
-# 4
-# 5
-# ('A', 'B')
+# # (1, 2, 3)
+# # 4
+# # 5
+# # ('A', 'B')
 
-# bad_set = {{'a': 1}}  # TypeError: unhashable type: 'dict'
+# # bad_set = {{'a': 1}}  # TypeError: unhashable type: 'dict'
 
-# bad_set = {1, 2, [3,4,5]}    # TypeError: unhashable type: 'list'
-
-
-
-# Create an empty set
-a_set = set()
-b_set = set()
-c_set = set()      # mutable, but not hashable
-a_froz_set = frozenset()  # not mutable, but hashable
+# # bad_set = {1, 2, [3,4,5]}    # TypeError: unhashable type: 'list'
 
 
-# add to a set
-for item in range(1,11):
-    a_set.add(item)
-    if item > 5:
-        b_set.add(item)
-print(f' a_set: {a_set} with length {len(a_set)} & type {type(a_set)}')
-print(f' b_set is {b_set}')
- # a_set: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} with length 10 & type <class 'set'>
- # b_set is {6, 7, 8, 9, 10}
 
-# mutable sets CANNOT have sets as elem
-# a_set.add(b_set)   # TypeError: unhashable type: 'set'
-
-# Create frozen set
-b_froz_set = frozenset(b_set)
-print(f'b_frozen_set is {b_froz_set}')  # b_frozen_set is frozenset({6, 7, 8, 9, 10})
-
-# adding a frozen set to a set
-new_set = {0,'a'}
-new_set.add(b_froz_set)
-print(f'new_set is now {new_set} ')
+# # Create an empty set
+# a_set = set()
+# b_set = set()
+# c_set = set()      # mutable, but not hashable
+# a_froz_set = frozenset()  # not mutable, but hashable
 
 
-# return what is `a_set` that is not in `b_set`
-only_in_a = a_set.difference(b_set)
-print(only_in_a)    # {1, 2, 3, 4, 5}
+# # add to a set
+# for item in range(1,11):
+#     a_set.add(item)
+#     if item > 5:
+#         b_set.add(item)
+# print(f' a_set: {a_set} with length {len(a_set)} & type {type(a_set)}')
+# print(f' b_set is {b_set}')
+#  # a_set: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} with length 10 & type <class 'set'>
+#  # b_set is {6, 7, 8, 9, 10}
 
-# return items that are in both sets
-diff = a_set.intersection(b_set)
-print(diff)         # {6, 7, 8, 9, 10}
+# # mutable sets CANNOT have sets as elem
+# # a_set.add(b_set)   # TypeError: unhashable type: 'set'
 
-# return True only if both ets have no elem in common
-print(a_set.isdisjoint(b_set))   # False
+# # Create frozen set
+# b_froz_set = frozenset(b_set)
+# print(f'b_frozen_set is {b_froz_set}')  # b_frozen_set is frozenset({6, 7, 8, 9, 10})
 
-# return True only if all `b_set` elem are also in `a_set`
-print(b_set.issubset(a_set))      # True
-print(a_set.issuperset(b_set))    # True
-
-print(c_set.issubset(a_froz_set))    # True since both are empty
-
-# return set of elem that in `d_set` or `e_set` but not in both
-d_set = {1, 2, 5}
-e_set = {5, 6, 7}
-print(d_set.symmetric_difference(e_set))   # {1, 2, 6, 7}
-
-# return set of elements that are either d_set or e_set
-print(d_set.union(e_set))
-
-# remove elements in d_set that are also in e_set
-du = (d_set.difference_update(e_set))
-print(du)    # None
-print(d_set)  # {1, 2}
-
-# remove item from set
-r = d_set.remove(1)
-print(r)
-print(d_set)
-
-r = d_set.discard(2)
-print(r)
-print(d_set)   # set()
-
-# update `d_set` with iterable obj
-d_set.update({1,2,3})
-print(d_set)
-
-# remove item from `d_set` and return it
-pop_val = d_set.pop()
-print(f' popval is {pop_val} and d_set is now {d_set}')
-
-d_set = {2, 3, 4, 5}
-e_set = {4, 5, 6, 7}
-# removes items from `d_set` that are NOT in the intersection of both sets
-d_set.intersection_update(e_set)
-print(d_set)    # {4, 5}
-
-d_set = {2, 3, 4, 5}
-# deletes all elements from `d_set` that are not in symmetic difference set
-sym_diff = d_set.symmetric_difference(e_set)
-print(sym_diff)  # {2, 3, 6, 7}
-
-# `d_set` is updated with the symmetic difference of `d_set` & `e_set`
-d_set.symmetric_difference_update(e_set)
-print(d_set)
+# # adding a frozen set to a set
+# new_set = {0,'a'}
+# new_set.add(b_froz_set)
+# print(f'new_set is now {new_set} ')
 
 
-# use enumerate to identify 'index' location in set
-for index, item in enumerate(d_set):
-    print(f'index: {index} item {item}')
+# # return what is `a_set` that is not in `b_set`
+# only_in_a = a_set.difference(b_set)
+# print(only_in_a)    # {1, 2, 3, 4, 5}
 
-# print(d_set[0])    #     TypeError: 'set' object is not subscriptable
+# # return items that are in both sets
+# diff = a_set.intersection(b_set)
+# print(diff)         # {6, 7, 8, 9, 10}
+
+# # return True only if both ets have no elem in common
+# print(a_set.isdisjoint(b_set))   # False
+
+# # return True only if all `b_set` elem are also in `a_set`
+# print(b_set.issubset(a_set))      # True
+# print(a_set.issuperset(b_set))    # True
+
+# print(c_set.issubset(a_froz_set))    # True since both are empty
+
+# # return set of elem that in `d_set` or `e_set` but not in both
+# d_set = {1, 2, 5}
+# e_set = {5, 6, 7}
+# print(d_set.symmetric_difference(e_set))   # {1, 2, 6, 7}
+
+# # return set of elements that are either d_set or e_set
+# print(d_set.union(e_set))
+
+# # remove elements in d_set that are also in e_set
+# du = (d_set.difference_update(e_set))
+# print(du)    # None
+# print(d_set)  # {1, 2}
+
+# # remove item from set
+# r = d_set.remove(1)
+# print(r)
+# print(d_set)
+
+# r = d_set.discard(2)
+# print(r)
+# print(d_set)   # set()
+
+# # update `d_set` with iterable obj
+# d_set.update({1,2,3})
+# print(d_set)
+
+# # remove item from `d_set` and return it
+# pop_val = d_set.pop()
+# print(f' popval is {pop_val} and d_set is now {d_set}')
+
+# d_set = {2, 3, 4, 5}
+# e_set = {4, 5, 6, 7}
+# # removes items from `d_set` that are NOT in the intersection of both sets
+# d_set.intersection_update(e_set)
+# print(d_set)    # {4, 5}
+
+# d_set = {2, 3, 4, 5}
+# # deletes all elements from `d_set` that are not in symmetic difference set
+# sym_diff = d_set.symmetric_difference(e_set)
+# print(sym_diff)  # {2, 3, 6, 7}
+
+# # `d_set` is updated with the symmetic difference of `d_set` & `e_set`
+# d_set.symmetric_difference_update(e_set)
+# print(d_set)
+
+
+# # use enumerate to identify 'index' location in set 
+# for index, item in enumerate(d_set):
+#     print(f'index: {index} item {item}')
+
+# # print(d_set[0])    #     TypeError: 'set' object is not subscriptable
+
