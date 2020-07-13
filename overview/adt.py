@@ -133,11 +133,11 @@ print(chain_map2.maps)
 
 # reverse child ChainMap
 print(f' \t >>>  dict1 is {dict1}')
-chain_map3 = collections.ChainMap(dict1)
+chain_map3 = collections.ChainMap(dict1, dict2)
 print(f' chain_map3 is {chain_map3}')
 
-chain_map3 = reversed(chain_map3.maps)
-print(f'should be reversed {str(chain_map3)}')
+chain_map3.maps = reversed(chain_map3.maps)
+print(f'should be reversed {(chain_map3)}')
 
 print("Reversed Chain: " + str(chain_map3))
 
@@ -148,9 +148,9 @@ print(chain_map4)
 chain_map4 = chain_map4.new_child({"E": "egg"})
 print(f' added E: egg  {chain_map4}')
 
-chain_map4 = reversed(chain_map4.maps)
+chain_map4.maps = reversed(chain_map4.maps)
 
-print(chain_map4)
+print(f' REVERSED !!!   {chain_map4}')
 print("Reversed Chain: " + str(chain_map4))
 
 con_code1 = {'India' : 'IN', 'China' : 'CN'}
